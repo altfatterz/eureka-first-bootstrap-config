@@ -1,0 +1,10 @@
+# common configuration
+
+---
+spring.profiles: dev
+dev.eureka.password: eureka-dev
+
+
+---
+spring.profiles: prod
+prod.eureka.password: eureka-prod

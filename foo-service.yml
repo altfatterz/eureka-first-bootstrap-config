@@ -1,2 +1,26 @@
 server:
-  port: 8080
+  port: 8081
+
+spring:
+  security:
+    user:
+      name: foo
+
+eureka:
+  instance:
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+
+---
+spring.profiles: dev
+spring.security.user.password: 'foo-dev'
+
+eureka.client.service-url.defaultZone: http://eureka:${dev.eureka.password}@localhost:8761/eureka/
+
+---
+spring.profiles: prod
+spring.security.user.password: 'foo-prod'
+
+eureka.client.service-url.defaultZone: http://eureka:${prod.eureka.password}@localhost:8761/eureka/
+

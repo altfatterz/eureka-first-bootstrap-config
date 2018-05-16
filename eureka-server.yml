@@ -1,2 +1,30 @@
 server:
-  port: 8888
+  port: 8761
+
+spring:
+  security:
+    user:
+      name: eureka
+
+eureka:
+  instance:
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+
+---
+spring.profiles: dev
+spring.security.user.password: ${dev.eureka.password}
+
+eureka.client.service-url.defaultZone: http://${spring.security.user.name}:${dev.eureka.password}@localhost:8761/eureka/
+
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+
+---
+spring.profiles: prod
+spring.security.user.password: ${prod.eureka.password}
+
+eureka.client.service-url.defaultZone: http://${spring.security.user.name}:${prod.eureka.password}@localhost:8761/eureka/
