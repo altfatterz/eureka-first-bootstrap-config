@@ -3,8 +3,9 @@
 ---
 spring.profiles: dev
 dev.eureka.password: eureka-dev
-
+dev.config.password: config-dev
 
 ---
 spring.profiles: prod
 prod.eureka.password: eureka-prod
+prod.config.password: config-prod

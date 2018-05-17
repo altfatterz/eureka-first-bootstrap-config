@@ -16,6 +16,6 @@ server.port: 8081
 
 ---
 spring.profiles: prod
-spring.security.user.password: 'foo-prod'
+spring.security.user.password: foo-prod
 server.port: 8082
 
