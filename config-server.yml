@@ -10,17 +10,27 @@ spring:
 eureka:
   instance:
     metadata-map:
-      # DiscoveryClientConfigServiceBootstrapConfiguration#refresh
+      # see DiscoveryClientConfigServiceBootstrapConfiguration#refresh
       user: ${spring.security.user.name}
       password: ${spring.security.user.password}
 
 ---
-
-spring.profiles: dev
-eureka.client.service-url.defaultZone: http://eureka:${dev.eureka.password}@localhost:8761/eureka/
-
+spring:
+  profiles: dev
+eureka:
+  client.service-url.defaultZone: http://eureka:${dev.eureka.password}@localhost:8761/eureka/
 ---
-
-spring.profiles: prod
-eureka.client.service-url.defaultZone: http://eureka:${prod.eureka.password}@localhost:8761/eureka/
-
+spring:
+  profiles: prod
+eureka:
+  client.service-url.defaultZone: http://eureka:${prod.eureka.password}@peer1:8762/eureka/,http://eureka:${prod.eureka.password}@peer2:8763/eureka/
+---
+spring.profiles: prod-peer1
+spring.profiles.include:
+  - prod
+server.port: 8881
+---
+spring.profiles: prod-peer2
+spring.profiles.include:
+  - prod
+server.port: 8882
